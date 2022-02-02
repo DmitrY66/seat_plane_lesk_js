@@ -1,5 +1,6 @@
 import start from "./modules/start.js";
 import getFormPerson from "./modules/formPerson.js";
+import readyPlane from "./modules/readyPlane.js";
 
 const init = (selecorApp, title) => {
 
@@ -13,11 +14,11 @@ const init = (selecorApp, title) => {
     const forms = getFormPerson(firstForm.count.value);
     firstForm.remove();
 
-    main.append(...forms)
+    main.append(...forms);
+
+    readyPlane(forms, main);
 
   });
-
-
 
 };
 

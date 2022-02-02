@@ -2,7 +2,7 @@ import createElement from "./createElement.js";
 
 const createFormPerson = (n) => {
   const form = createElement('form', {
-    className: 'persun',
+    className: 'person',
   });
   
   // title
@@ -49,8 +49,8 @@ const createFormPerson = (n) => {
     type: 'text',
     placeholder: 'Номер билета',
     required: true,
-    minLength: '10',
-    maxLength: '10',
+    minLength: 10,
+    maxLength: 10,
   });
 
   // button
