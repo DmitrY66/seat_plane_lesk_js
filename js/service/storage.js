@@ -1,25 +1,40 @@
+const STORAGE = 'https://airplane-methed.herokuapp.com/airplane/';
+
 // получаем
-export const getStorage = (id) => {
-  if (localStorage.getItem(`tour-${id}`)) {
-    return JSON.parse(localStorage.getItem(`tour-${id}`));
-  } else {
-    return [];
-  }
-};
+// export const getStorage = (id) => {
+//   if (localStorage.getItem(`tour-${id}`)) {
+//     return JSON.parse(localStorage.getItem(`tour-${id}`));
+//   } else {
+//     return [];
+//   }
+// };
+export const getStorage = id => fetch(`${STORAGE}${id}`)
+  .then(response => response.json())
+  .then(data => data?.seats || []);
+// .then(data => console.log(data));
 
 // отправляем
+// export const setStorage = (id, data) => {
+//   const storage = getStorage(id);
+//   const filterBooking = storage.filter(item => {
+//     for (let i = 0; i < data.length; i++) {
+//       if (data[i].ticket === item.ticket) {
+//         return false;
+//       }
+//     }
+//     return item;
+//   });
+
+//   const newBooking = [...filterBooking, ...data];
+
+//   localStorage.setItem(`tour-${id}`, JSON.stringify(newBooking));
+// };
 export const setStorage = (id, data) => {
-  const storage = getStorage(id);
-  const filterBooking = storage.filter(item => {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].ticket === item.ticket) {
-        return false;
-      }
-    }
-    return item;
-  });
-
-  const newBooking = [...filterBooking, ...data];
-
-  localStorage.setItem(`tour-${id}`, JSON.stringify(newBooking));
+  fetch(`${STORAGE}${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
 };
